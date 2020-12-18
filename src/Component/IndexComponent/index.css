@@ -1,0 +1,25 @@
+.nav-item.icon{
+    width: 80px;
+}
+.nav-item.icon img{
+    width: 30px;
+}
+p.card-text{
+    font-size: 14px;
+    color: #aaa;
+}
+.col{
+    margin:0 20px;
+}
+.col .card{
+    width: 210px;
+    position: relative;
+}
+.col .card-body{
+    padding: 10px 10px;
+}
+.btn.btn-add-to-card{
+    background-color: rgb(35, 155, 125);
+    position: absolute;
+    bottom: -10px;
+}
