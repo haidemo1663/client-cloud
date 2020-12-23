@@ -17,10 +17,12 @@
     list-style-type: none;
 }
 .login-block .form input{
-    border-radius: 20px;
+    border-radius: 30px;
+    height: 50px;
 }
 .login-block .form .btn{
-    border-radius: 20px;
+    border-radius: 30px;
     background-color: #387a6e;
+    height: 50px;
     border: none;
 }

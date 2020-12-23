@@ -9,8 +9,9 @@ import IndexComponent from './Component/IndexComponent/IndexComponent';
 import Order from './Component/IndexComponent/Order';
 import shortid from "shortid";
 import { useCookies} from 'react-cookie';
+import GetOrder from './Component/IndexComponent/GetOrder';
  function App() {
-    const [cookies, setCookie]=useCookies(["SessionId","Cart"]);
+    const [cookies, setCookie]=useCookies(["SessionId","Cart","User"]);
     if(!cookies["SessionId"]){
         setCookie("SessionId",shortid.generate());
         setCookie("Cart",[]);
@@ -21,12 +22,11 @@ import { useCookies} from 'react-cookie';
                 <Switch>
                     <Route path="/" exact component={IndexComponent}></Route>
                     <Route path="/orders/:id"  component={Order}></Route>
-                    <Route path="/admin">{
-                        (!cookies["user"])? <Login/>:<Admin/>
-                    }</Route>
-                    <Route path="/login"  component={Login}></Route>
+                    <Route path="/admin" component={Admin}></Route>
+                    <Route path="/login" exact component={Login}></Route>
                     <Route path="/admin/users" component={Userlist}></Route>
                     <Route path="/admin/books" component={BookList}></Route>
+                    <Route path="/admin/orders" component={GetOrder}></Route>
                     
                 </Switch>
             </div>

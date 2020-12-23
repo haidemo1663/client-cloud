@@ -1,0 +1,12 @@
+.table-order{
+    display: flex;
+    width: 100%;
+}
+.table-order table.table{
+    margin-top: 20px;
+    margin-right: 50px;
+    width: 60%;
+}
+.table-order table.table td,.table-order table.table th{
+    width: 10px;
+}

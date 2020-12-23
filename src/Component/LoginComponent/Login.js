@@ -9,9 +9,10 @@ export default function Login(props) {
         pwd: ""
     });
     const [error, setError] = useState([]);
-    const [cookies,setCookie]=useCookies(["user"]);
+    const [cookies, setCookie] = useCookies([]);
     const handleSubmit = async (event) => {
         if (event) event.preventDefault();
+
         //Kiểm tra lỗi của input trong form và hiển thị
         const validate = validationForm();
         if (validate.error) {
@@ -21,11 +22,10 @@ export default function Login(props) {
                 pwd: ""
             });
         }
-         else {
+        else {
             let result = await accountService.checkout(values);
-            if (result.data)
-            {
-                (!cookies["user"])? setCookie("user",result.data.email): history.push('/admin');
+            if (result.data) {
+                setCookie('User',values.email,'utf-8')
                 history.push('/admin');
             }
             else {
@@ -71,12 +71,12 @@ export default function Login(props) {
         <div className='login-block'>
             <h3>LOGIN</h3>
             {
-                error.length>0?
+                error.length > 0 ?
                     <div className="error-block">
                         <ul>
-                            {error.map((err,index)=><li key={index}>{err}</li>)}
+                            {error.map((err, index) => <li key={index}>{err}</li>)}
                         </ul>
-                    </div>:<div></div>
+                    </div> : <div></div>
             }
             <form className="form" onSubmit={e => { handleSubmit(e) }}>
                 <div className="form-group">

@@ -9,10 +9,10 @@ p.card-text{
     color: #aaa;
 }
 .col{
-    margin:0 20px;
+    margin-bottom: 50px;
 }
 .col .card{
-    width: 210px;
+    width: 80%;
     position: relative;
 }
 .col .card-body{

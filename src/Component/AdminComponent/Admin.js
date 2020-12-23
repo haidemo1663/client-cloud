@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import img from "../../image/img.jpg";
 import mail from "../../image/email.svg"
 import cart from "../../image/shopping-cart.svg";
@@ -13,7 +13,13 @@ import CreateBook from "../BookComponent/CreateBook";
 import UpdateBook from "../BookComponent/updateBook";
 import Login from "../LoginComponent/Login";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-export default function Admin() {
+import { useCookies } from 'react-cookie';
+import GetOrder from '../IndexComponent/GetOrder';
+export default function Admin(props) {
+    const [cookies,setCookie]=useCookies([])
+    useEffect(()=>{
+        if(!cookies["User"]) props.history.push("/login");
+    })
     return (
         <div>
             <Router>
@@ -33,7 +39,7 @@ export default function Admin() {
                     <div className="general">
                         <p>GENERAL</p>
                         <div className="item">
-                            <img src={logo} alt="..." /><span><Link to="/admin/users/" style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>HOME</Link></span>
+                            <img src={logo} alt="..." /><span><Link to="/admin/orders/" style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>HOME</Link></span>
                         </div>
                         <div className="item">
                             <img src={logo} alt="..." /><span> PROFILE</span>
@@ -61,17 +67,18 @@ export default function Admin() {
                             </li>
                         </ul>
                     </div>
-                    <div style={{width:"90%"}}>
-                    <Switch>
-                        <Route path="/admin/users" exact component={Userlist}></Route>
-                        <Route path="/admin/users/create"  component={CreateUser}></Route>
-                        <Route path="/admin/users/update/:id"  component={UpdateUser}></Route>
-                        <Route path="/admin/books" exact component={BookList}></Route>
-                        <Route path="/admin/books/create"  component={CreateBook}></Route>
-                        <Route path="/admin/books/update/:id" component={UpdateBook}></Route>
-                        <Route path="/login" exact component={Login}></Route>
-                    </Switch>
-                </div>
+                    <div style={{ width: "90%" }}>
+                        <Switch>
+                            <Route path="/admin/users" exact component={Userlist}></Route>
+                            <Route path="/admin/users/create" component={CreateUser}></Route>
+                            <Route path="/admin/users/update/:id" component={UpdateUser}></Route>
+                            <Route path="/admin/books" exact component={BookList}></Route>
+                            <Route path="/admin/books/create" component={CreateBook}></Route>
+                            <Route path="/admin/books/update/:id" component={UpdateBook}></Route>
+                            <Route path="/login" exact component={Login}></Route>
+                            <Route path="/admin/orders" exact component={GetOrder}></Route>
+                        </Switch>
+                    </div>
                 </div>
             </Router>
         </div>

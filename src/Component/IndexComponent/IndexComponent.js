@@ -67,8 +67,8 @@ export default function IndexComponent() {
                     </ul>
                 </div>
                 <Cartt listItem={cookies["Cart"]} hidden={hidden} sessionid={cookies["SessionId"]}/>
-                <div className="container m-4">
-                    <div className="row row-cols-1 row-cols-md-4">
+                <div className="container m-5">
+                    <div className="row row-cols-1 row-cols-md-4 g-4">
                         {
                             values.map((item) =>
                                 <div className="col" key={item.id}>

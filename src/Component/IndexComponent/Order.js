@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 import { useCookies } from "react-cookie";
-import oderService from "../../Service/oderService";
+import orderService from "../../Service/orderService";
 import './order.css';
 export default function Order(props) {
     const { history } = props;
@@ -10,6 +10,11 @@ export default function Order(props) {
         phone: "",
 
     });
+    const dateDefault=() => {
+        var curr = new Date();
+        return curr.getDate()+"/"+(curr.getMonth()+1)+"/"+curr.getFullYear();
+    }
+    dateDefault()
     const [cookies, setCookie] = useCookies([]);
     const listItem = cookies["Cart"];
     const handleChange = (event) => {
@@ -26,14 +31,15 @@ export default function Order(props) {
             alert(validation.msg)
         }
         else {
-            let total=listItem.reduce((value,crr)=>value+crr.total,0);
-            let order={
-                customer:values,
-                orderlist:listItem,
+            let total = listItem.reduce((value, crr) => value + crr.total, 0);
+            let order = {
+                customer: values,
+                orderlist: listItem,
+                datetime: dateDefault(),
                 total: total
             }
             console.log(order);
-            await oderService.createOrder(order);
+            await orderService.createOrder(order);
             setCookie("Cart", []);
             history.push("/");
         }
@@ -56,9 +62,12 @@ export default function Order(props) {
         <div>
             <div className="container" style={{ paddingTop: "5%" }}>
                 <form encType="multipart/form-data" onSubmit={e => { onSubmit(e) }} className="customer-content">
-                    <p>Please enter Your Infomation</p>
+                    <h5>Please enter Your Infomation</h5>
                     <div className="form-group">
-                        <label htmlFor="text">Name :</label>
+                        <p>Today: {dateDefault()}</p>   
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="name">Name :</label>
                         <input
                             type="text"
                             className="form-control"
@@ -95,8 +104,8 @@ export default function Order(props) {
                         Submit
                         </button>
                 </form>
-                <ul className="shopping-cart-items" style={{margin:"0 50px"}}>
-                    <p>Your Order Content</p>
+                <ul className="shopping-cart-items-order" style={{ margin: "0 50px" }}>
+                    <h5>Your Order Content</h5>
                     {
                         listItem.map((item, index) => {
                             return (
